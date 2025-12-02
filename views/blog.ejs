@@ -14,11 +14,15 @@
                             <%= blog.category %>
                         </a>
                         <span class="absolute right-0 mt-1 text-gray-500 text-sm dark:hover:text-gray-50 dark:text-gray-300">
+                            <% if (blog.published_at) {%>
                             <%= days[blog.published_at.getDay()] %>
                                 <%= blog.published_at.getMonth() %>
                                     <%= blog.published_at.getFullYear() %>
                                     <%= blog.published_at.getHours() %>:<%= blog.published_at.getMinutes() %>:<%=
                                         blog.published_at.getSeconds() %>
+                            <% }else{ %>
+                                Not Published Yet
+                            <% } %>
                         </span>
                     </div>
 
