@@ -305,19 +305,22 @@
                 <td class="p-4">
                   <% if (blog.published_at) { %> <%=
                   days[blog.published_at.getDay()] %> <%=
-                  blog.published_at.getMonth()%> <%=
+                  blog.published_at.getMonth() + 1 %>/ <%=
+                  blog.published_at.getDate() %>/ <%=
                   blog.published_at.getFullYear() %> <%=
                   blog.published_at.getHours().toString().padStart(2, '0') %>:
                   <%= blog.published_at.getMinutes().toString().padStart(2, '0')
                   %>: <%= blog.published_at.getSeconds().toString().padStart(2,
                   '0') %> <% } else { %> <%= days[blog.created_at.getDay()] %>
-                  <%= blog.created_at.getMonth()%> <%=
+                  <%= blog.created_at.getMonth() + 1 %>/ <%=
+                  blog.created_at.getDate() %>/ <%=
                   blog.created_at.getFullYear() %> <%=
                   blog.created_at.getHours().toString().padStart(2, '0') %>: <%=
                   blog.created_at.getMinutes().toString().padStart(2, '0') %>:
                   <%= blog.created_at.getSeconds().toString().padStart(2, '0')
                   %> <% } %>
                 </td>
+
                 <td class="p-4 space-x-2">
                   <a
                     href="/blog/<%= blog.id %>"
