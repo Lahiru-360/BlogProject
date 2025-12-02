@@ -233,14 +233,17 @@
                 <td class="p-4"><%= blog.category %></td>
                 <td class="p-4"><%= blog.firstname %> <%= blog.lastname %></td>
                 <td class="p-4">
-                  <%= days[blog.published_at.getDay()] %> <%=
-                  blog.published_at.getMonth() %> <%=
+                  <% if (blog.published_at) { %> <%=
+                  days[blog.published_at.getDay()] %> <%=
+                  (blog.published_at.getMonth() + 1) %>/ <%=
+                  blog.published_at.getDate() %>/ <%=
                   blog.published_at.getFullYear() %> <%=
                   blog.published_at.getHours().toString().padStart(2, '0') %>:
                   <%= blog.published_at.getMinutes().toString().padStart(2, '0')
                   %>: <%= blog.published_at.getSeconds().toString().padStart(2,
-                  '0') %>
+                  '0') %> <% } else { %> Not Published Yet <% } %>
                 </td>
+
                 <td class="p-4 space-x-2">
                   <a
                     href="/blog/<%= blog.id %>"
