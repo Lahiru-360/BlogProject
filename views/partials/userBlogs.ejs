@@ -25,9 +25,11 @@
           <% if (blog.published_at) { %>
           <p class="text-sm text-gray-500 dark:text-gray-400">
             <%= days[blog.published_at.getDay()] %> <%=
-            blog.published_at.getMonth() %> <%= blog.published_at.getFullYear()
+            blog.published_at.getMonth() + 1 %> / <%=
+            blog.published_at.getDate() %> / <%= blog.published_at.getFullYear()
+            %>
           </p>
-          %> <% } else { %>
+          <% } else { %>
           <p class="text-sm text-gray-500 dark:text-gray-400">
             Not Published Yet
           </p>
