@@ -130,7 +130,7 @@ app.get("/admin", async (req, res) => {
     ).rows;
     const approveBlogData = (
       await db.query(
-        "SELECT b.id, b.blogname, b.blogcontent, b.published_at, b.category, u.firstname, u.lastname, u.email FROM blogs b LEFT JOIN users u ON b.blogauthor_id = u.id WHERE b.status=$1",
+        "SELECT b.id, b.blogname, b.blogcontent, b.published_at, b.created_at, b.category, u.firstname, u.lastname, u.email FROM blogs b LEFT JOIN users u ON b.blogauthor_id = u.id WHERE b.status=$1",
         ["pending"]
       )
     ).rows;
