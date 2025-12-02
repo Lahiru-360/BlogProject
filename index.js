@@ -150,6 +150,7 @@ app.get("/admin", async (req, res) => {
 app.get("/profile/:id", async (req, res) => {
   const id = req.params.id;
   var user = req.user;
+  console.log(user);
   const blogs = (
     await db.query("SELECT * FROM blogs where blogauthor_id = $1", [id])
   ).rows;

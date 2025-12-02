@@ -1,37 +1,66 @@
-<div class="animate-fade-in bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-4xl w-full p-6 mx-auto mt-6 overflow-auto custom-scrollbar" style="max-height: 400px">
-  <h2 class="text-2xl font-bold text-indigo-800 dark:text-white mb-4">Your Blogs</h2>
+<div
+  class="animate-fade-in bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-4xl w-full p-6 mx-auto mt-6 overflow-auto custom-scrollbar"
+  style="max-height: 400px"
+>
+  <h2 class="text-2xl font-bold text-indigo-800 dark:text-white mb-4">
+    Your Blogs
+  </h2>
 
-  <% if (locals.blogs && blogs.length > 0) { %>
-    <% const days=["Sun", "Mon" , "Tue" , "Wed" , "Thurs" , "Fri" , "Sat" ]; %>
-    <ul class="space-y-4">
-      <% blogs.forEach(blog => { %>
-        <li class="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-sm flex justify-between items-center">
-          <div>
-            <div class="flex">
-                 <p class="text-sm text-gray-500 dark:text-gray-400 mr-4">ID: <%= blog.id %></p>
-                 <p class="text-sm text-gray-500 dark:text-gray-400 mr-4">Status: <%= blog.status %></p>
-                 <p></p>
-                <p class="text-sm text-gray-500 dark:text-gray-400"><%= days[blog.published_at.getDay()] %>
-                                                <%= blog.published_at.getMonth() %>
-                                                    <%= blog.published_at.getFullYear() %>
-            </div>
-            <a href="/blog/<%= blog.id %>"><h3 class="text-lg font-semibold text-gray-800 hover:opacity-75  dark:text-white transition"><%= blog.blogname %></h3></a>
-          </div>
-          <div class="flex space-x-2">
-            <a href="/editblog/<%= blog.id %>" 
-               class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-              Edit
-            </a>
-            <a href="/deleteblog/<%= blog.id %>" 
-               class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition">
-              Delete
-            </a>
-          </div>
-        </li>
-      <% }) %>
-    </ul>
+  <% if (locals.blogs && blogs.length > 0) { %> <% const days=["Sun", "Mon" ,
+  "Tue" , "Wed" , "Thurs" , "Fri" , "Sat" ]; %>
+  <ul class="space-y-4">
+    <% blogs.forEach(blog => { %>
+    <li
+      class="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-sm flex justify-between items-center"
+    >
+      <div>
+        <div class="flex">
+          <p class="text-sm text-gray-500 dark:text-gray-400 mr-4">
+            ID: <%= blog.id %>
+          </p>
+          <p class="text-sm text-gray-500 dark:text-gray-400 mr-4">
+            Status: <%= blog.status %>
+          </p>
+          <p></p>
+          <% if (blog.published_at) { %>
+          <p class="text-sm text-gray-500 dark:text-gray-400">
+            <%= days[blog.published_at.getDay()] %> <%=
+            blog.published_at.getMonth() %> <%= blog.published_at.getFullYear()
+          </p>
+          %> <% } else { %>
+          <p class="text-sm text-gray-500 dark:text-gray-400">
+            Not Published Yet
+          </p>
+          <% } %>
+        </div>
+        <a href="/blog/<%= blog.id %>"
+          ><h3
+            class="text-lg font-semibold text-gray-800 hover:opacity-75 dark:text-white transition"
+          >
+            <%= blog.blogname %>
+          </h3></a
+        >
+      </div>
+      <div class="flex space-x-2">
+        <a
+          href="/editblog/<%= blog.id %>"
+          class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+        >
+          Edit
+        </a>
+        <a
+          href="/deleteblog/<%= blog.id %>"
+          class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+        >
+          Delete
+        </a>
+      </div>
+    </li>
+    <% }) %>
+  </ul>
   <% } else { %>
-    <p class="text-gray-600 dark:text-gray-300">You haven't created any blogs yet.</p>
+  <p class="text-gray-600 dark:text-gray-300">
+    You haven't created any blogs yet.
+  </p>
   <% } %>
 </div>
-
