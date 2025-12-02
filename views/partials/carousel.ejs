@@ -1,0 +1,90 @@
+<div class="sliderAx h-auto">
+  <div id="slider-1" class="container mx-auto hidden">
+    <div class="bg-cover bg-center  h-auto text-white py-24 px-10 object-fill rounded-lg"
+      style="background-image: url(/images/carousel-1.jpg)">
+      <div class="md:w-1/2">
+        <p class="font-bold text-sm uppercase">Bloggy</p>
+        <p class="text-3xl font-bold">Welcome to Bloggy!</p>
+        <p class="text-2xl mb-10 leading-none">Prepare to be informed on latest tech updates.</p>
+        <a href="#"
+          class="bg-indigo-500 py-4 px-8 text-white font-bold uppercase text-xs rounded hover:bg-gray-200 hover:text-gray-800 transition duration-300 ease-in-out">Contact
+          us</a>
+      </div>
+    </div> <!-- container -->
+    <br>
+  </div>
+
+  <div id="slider-2" class="container mx-auto hidden">
+    <div class="bg-cover bg-top  h-auto text-white py-24 px-10 object-fill rounded-lg"
+      style="background-image: url('/images/carousel-2.jpg')">
+
+      <p class="font-bold text-sm uppercase">BLOGGY</p>
+      <p class="text-3xl font-bold">Create a blog.</p>
+      <p class="text-2xl mb-10 leading-none">Join with us to spread the seeds of knowledge.</p>
+      <a href="/create"
+        class="bg-indigo-500 py-4 px-8 text-white font-bold uppercase text-xs rounded hover:bg-gray-200 hover:text-gray-800 transition duration-300 ease-in-out">Create Blog</a>
+
+    </div> <!-- container -->
+    <br>
+  </div>
+</div>
+<div class="flex justify-between w-10 mx-auto pb-2 ">
+  <button id="sButton1" onclick="sliderButton1()" class="bg-indigo-400 rounded-full w-3 pb-1 "></button>
+  <button id="sButton2" onclick="sliderButton2() " class="bg-indigo-400 rounded-full w-3 p-1"></button>
+</div>
+
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+<script>
+  let cont = 0;
+  let sliderInterval;
+
+  function showSlide(slideToShow, slideToHide, activeButton, inactiveButton) {
+  $(slideToHide).stop(true, true).hide(); // immediately hide the other slide
+  $(slideToShow).stop(true, true).fadeIn(500); // fade in the current one
+  $(inactiveButton).removeClass("bg-indigo-800");
+  $(activeButton).addClass("bg-indigo-800");
+}
+
+
+  function switchSlide() {
+    if (cont === 0) {
+      showSlide("#slider-2", "#slider-1", "#sButton2", "#sButton1");
+      cont = 1;
+    } else {
+      showSlide("#slider-1", "#slider-2", "#sButton1", "#sButton2");
+      cont = 0;
+    }
+  }
+
+  function startSlider() {
+    sliderInterval = setInterval(switchSlide, 8000);
+  }
+
+  function resetSlider() {
+    clearInterval(sliderInterval);
+    startSlider();
+  }
+
+  function sliderButton1() {
+    if (cont !== 0) {
+      showSlide("#slider-1", "#slider-2", "#sButton1", "#sButton2");
+      cont = 0;
+      resetSlider();
+    }
+  }
+
+  function sliderButton2() {
+    if (cont !== 1) {
+      showSlide("#slider-2", "#slider-1", "#sButton2", "#sButton1");
+      cont = 1;
+      resetSlider();
+    }
+  }
+
+  $(document).ready(function () {
+    $("#sButton1").addClass("bg-indigo-800");
+    $("#slider-1").removeClass("hidden");
+    startSlider();
+  });
+
+</script>

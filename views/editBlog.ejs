@@ -1,0 +1,111 @@
+<%-include("partials/header.ejs")%>
+    <!-- Create the editor container -->
+
+    <div class="container mx-auto px-4 animate-fade-in" style="max-width: 800px ">
+        <form action="/editblog/<%= blog.id %>" method="POST" id="blogForm">
+            <!-- Create the editor container -->
+            <div class="mb-4">
+                <label for="title" class="ml-2">Title:</label>
+                <input type="text" placeholder="Title" id="title" name="title" value="<%= blog.blogname %>"
+                    class="w-full mt-1 dark:bg-[#1c1c24] border border-gray-300 dark:border-[#1c1c24]  text-gray-800 dark:text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+                    autocomplete="off">
+            </div>
+            <div class="mb-4">
+                <label for="type" class="ml-2">Type:</label>
+                <select name="type" id="typeSelect"
+                    class="w-full mt-1 dark:bg-[#1c1c24] border border-gray-300 dark:border-[#1c1c24]  text-gray-800 dark:text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-600">
+                    <option value="Other">Other</option>
+                    <option value="Programming">Programming</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Career">Career</option>
+                    <option value="Databases">Databases</option>
+                    <option value="Web Design">Web Design</option>
+                </select>
+            </div>
+            <input type="hidden" name="authorId" value="<%= user.id %>">
+            <div class="mb-4">
+                <label for="content" class="ml-2">Content:</label>
+                <input type="hidden" id="content" name="content" required>
+                <div class="mt-1"></div>
+                <div id="editor" class="custom-scrollbar">
+                    <%- blog.blogcontent %>
+                </div>
+            </div>
+
+            <button type="submit"
+                class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out">Submit</button>
+
+        </form>
+    </div>
+
+
+    <!-- Include the Quill library -->
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+
+    <!-- Initialize Quill editor -->
+    <script>
+
+        const typeSelect = document.getElementById('typeSelect');
+
+        for (let i = 0; i < typeSelect.options.length; i++) {
+            if (typeSelect.options[i].value == "<%= blog.category %>") {
+                typeSelect.options[i].selected = true;
+                break; // Exit the loop once the option is found
+            }
+        }
+
+        var content = document.getElementById('content')
+        const title = document.getElementById('title')
+        const quill = new Quill('#editor', {
+            theme: 'snow'
+        });
+
+        const blogForm = document.getElementById('blogForm');
+        blogForm.addEventListener("submit", async (event) => {
+            const isDark = document.documentElement.classList.contains('dark');
+            event.preventDefault();
+            content.value = await quill.root.innerHTML;
+            if (title.value.trim().length != 0) {
+                if (quill.getText().trim().length > 150) {
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: 'You are about to edit this blog post!',
+                        icon: 'warning',
+                        theme: isDark ? 'dark' : 'light',
+                        showCancelButton: true,
+                        iconColor: '#6362F1',
+                        confirmButtonColor: '#6362F1', // A nice blue color
+                        cancelButtonColor: '#d33', // A red color
+                        confirmButtonText: 'Yes, submit it!'
+                    }).then((result) => {
+                        // Check if the user clicked the "Yes, submit it!" button
+                        if (result.isConfirmed) {
+                            // If confirmed, submit the form programmatically
+                            blogForm.submit();
+                        }
+                    });
+
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Not Enough Characters',
+                        text: 'A blog needs a minimum of 150 characters to be published.',
+                        iconColor: "#6362F1",
+                        theme: isDark ? 'dark' : 'light',
+                    });
+                }
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Empty Field',
+                    text: 'A blog needs a title in order to be published.',
+                    iconColor: "#6362F1",
+                    theme: isDark ? 'dark' : 'light',
+                });
+            }
+
+
+        })
+
+    </script>
+    <%-include("partials/footer.ejs")%>

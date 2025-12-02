@@ -1,0 +1,175 @@
+<%-include("partials/header.ejs") %>
+    <!-- component -->
+    <div class=" flex justify-center items-center h-screen">
+        <!-- Left: Image -->
+        <div class="w-1/2 h-screen hidden lg:block">
+            <img src="/images/login-img.jpg" id="target-section" alt="Placeholder Image"
+                class="object-cover w-full h-full rounded-r-3xl">
+        </div>
+        <!-- Right: Login Form -->
+        <div class="w-full md:w-1/2 p-6 md:p-12">
+            <div class="max-w-xl mx-auto">
+                <h1 class="text-2xl font-semibold mb-2">Create an account</h1>
+                <p class="dark:text-gray-400 text-gray-600 mb-8">
+                    Already have an account?
+                    <a href="/login"
+                        class="dark:text-white font-semibold  text-black dark:hover:text-indigo-600 hover:text-indigo-600 transition duration-300 ease-in-out">Log
+                        in</a>
+                </p>
+
+                <form action="/register" method="POST"class="space-y-4" id="registerForm">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <input type="text" name="fName" placeholder="First name" id="fName"
+                            class="w-full md:w-1/2 dark:bg-[#1c1c24] border border-gray-300 dark:border-[#1c1c24]  text-gray-800 dark:text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-600">
+                        <input type="text" name="lName" placeholder="Last name" id="lName"
+                            class="w-full md:w-1/2 dark:bg-[#1c1c24] border border-gray-300 dark:border-[#1c1c24]  text-gray-800 dark:text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-600">
+                    </div>
+                    <input type="email" name="username" placeholder="Email" id="username"
+                        class="w-full dark:bg-[#1c1c24] border border-gray-300 dark:border-[#1c1c24]  text-gray-800 dark:text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-600">
+                    <input type="password" name="password" placeholder="Password" id="password" name="password"
+                        class="w-full dark:bg-[#1c1c24] border border-gray-300 dark:border-[#1c1c24]  text-gray-800 dark:text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+                        autocomplete="off">
+
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="checkbox" id="terms"
+                            class="rounded bg-[#1c1c24] border-gray-600 text-purple-600 focus:ring-purple-600">
+                        <span class="dark:text-gray-400 text-gray-600">I agree to the <a href="#"
+                                class="dark:text-white   text-black dark:hover:text-indigo-600 hover:text-indigo-600 transition duration-300 ease-in-out">Terms
+                                & Conditions</a></span>
+                    </label>
+
+                    <button type="submit"
+                        class="w-full bg-indigo-600 text-white rounded-lg p-3 hover:bg-indigo-700 transition duration-300 ease-in-out">
+                        Create account
+                    </button>
+
+                    <div class="relative my-8">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-400 "></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="px-2 dark:bg-[#111827]  bg-gray-100 dark:text-gray-400 text-gray-600">Or
+                                register with</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col justify-center md:flex-row gap-4">
+                        <a href="/auth/google" class="
+                            w-full md:w-1/2
+                            flex items-center justify-center gap-2 
+                            rounded-lg p-3
+                            
+                            /* --- Light Mode Colors & Border --- */
+                            bg-gray-100 text-gray-800
+                            hover:bg-gray-200
+                            border-2 border-gray-300
+                            
+                            /* --- Dark Mode Colors & Border --- */
+                            dark:bg-[#1c1c24] dark:text-white
+                            dark:hover:bg-[#25252e]
+                            dark:border-none
+                            
+                            /* --- Transitions & Cursor --- */
+                            transition-colors duration-300
+                            cursor-pointer
+                            ">
+                            <svg class="w-5 h-5 dark:hidden" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12.24 10.35V13.86H18.49C18.23 15.17 17.51 16.29 16.48 17.07L20.17 20.76C22.31 18.57 23.5 15.65 23.5 12C23.5 10.98 23.39 9.98 23.18 9H12.24Z"
+                                    fill="#4285F4" />
+                                <path
+                                    d="M12.24 23.5C15.42 23.5 18.1 22.42 20.17 20.76L16.48 17.07C15.42 17.84 14.07 18.35 12.24 18.35C9.07 18.35 6.39 16.29 5.33 13.11H1.54V16.89C2.79 19.38 5.76 21 9.17 21C10.15 21 11.08 20.8 11.93 20.4L12.24 23.5Z"
+                                    fill="#34A853" />
+                                <path
+                                    d="M5.33 13.11C5.07 12.44 4.93 11.73 4.93 11C4.93 10.27 5.07 9.56 5.33 8.89V5.11H1.54C0.58 6.95 0 8.92 0 11C0 13.08 0.58 15.05 1.54 16.89L5.33 13.11Z"
+                                    fill="#FBBC04" />
+                                <path
+                                    d="M12.24 4.93C14.19 4.93 15.82 5.56 16.94 6.55L20.47 3.02C18.2 0.99 15.43 0 12.24 0C8.83 0 5.86 1.62 4.61 4.11L8.4 7.89C9.25 6.71 10.51 4.93 12.24 4.93Z"
+                                    fill="#EA4335" />
+                            </svg>
+
+                            <svg class="w-5 h-5 hidden dark:block" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z" />
+                            </svg>
+
+                            <span>Google</span>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        const username = document.getElementById("username")
+        const password = document.getElementById("password")
+        const registerForm = document.getElementById("registerForm")
+        const fName = document.getElementById("fName")
+        const lName = document.getElementById("lName")
+        const terms = document.getElementById("terms")
+        // Wait for the entire page to load
+        window.onload = function () {
+            // Get the element you want to scroll to by its ID
+            const targetElement = document.getElementById('target-section');
+
+            // Check if the element exists on the page
+            if (targetElement) {
+                // Use scrollIntoView() with the 'smooth' behavior
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        };
+
+        function isStrongPassword(password) {
+            const minLength = 8;
+            const hasUpperCase = /[A-Z]/.test(password);
+            const hasLowerCase = /[a-z]/.test(password);
+            const hasDigit = /[0-9]/.test(password);
+            const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+            return password.length >= minLength &&
+                hasUpperCase &&
+                hasLowerCase &&
+                hasDigit &&
+                hasSpecialChar;
+        }
+
+        registerForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const isDark = document.documentElement.classList.contains('dark');
+            if (username.value.length == 0 || password.value.length == 0 || fName.value.length == 0 || lName.value.length == 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Fields Incomplete',
+                    text: 'Please fill the incomplete fields',
+                    iconColor: "#6362F1",
+                    theme: isDark ? 'dark' : 'light',
+                });
+            } else if (!isStrongPassword(password.value)) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Weak Password',
+                    text: 'Your password must be at least 8 characters long and include uppercase, lowercase, a number, and a special character.',
+                    iconColor: "#6362F1",
+                    theme: isDark ? 'dark' : 'light',
+                });
+            } else {
+                if(terms.checked){
+                    console.log("submit")
+                    registerForm.submit();
+                }else{
+                    Swal.fire({
+                    icon: 'warning',
+                    title: 'Terms Not Accepted',
+                    text: 'You must accept the terms & conditions to proceed.',
+                    iconColor: "#6362F1",
+                    theme: isDark ? 'dark' : 'light',
+                });
+                }
+                
+            }
+        })
+    </script>
+    <%-include("partials/footer.ejs") %>

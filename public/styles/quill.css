@@ -1,0 +1,105 @@
+/* Base Quill editor container */
+#editor {
+    min-height: 300px;
+    /* or any height you want */
+    border: 0.5px solid #ccc;
+    border-radius: 0 0 0.5rem 0.5rem;
+    /* match your rounded-lg Tailwind */
+    padding: 1rem;
+    background-color: #fff;
+    color: #1f2937;
+    max-height: 500px;
+    overflow-y: auto;
+    /* Tailwind's gray-800 */
+}
+
+/* Dark mode styling */
+.dark #editor {
+    background-color: #1c1c24;
+    color: #f9fafb;
+    /* Tailwind's gray-50 */
+    border: none
+    
+}
+
+.dark #editor:focus-within {
+  outline: 1.5px solid #4F46E5; /* Tailwind Indigo-400 lighter for dark */
+  outline-offset: 2px;
+}
+
+/* Add focus ring for light mode */
+#editor:focus-within {
+  outline: 2px solid #4F46E5; /* Indigo-600 */
+  outline-offset: 2px;
+  border-radius: 0 0 0.5rem 0.5rem; /* match your rounded corners */
+}
+
+
+/* Quill toolbar */
+.ql-toolbar {
+    border: 1px solid #ccc;
+    border-radius: 0.5rem 0.5rem 0 0;
+    background-color: #f9fafb;
+}
+
+.dark .ql-toolbar {
+    background-color: #1c1c24;
+    border: none;
+    border-bottom: 0.5px solid #333;
+    color: #f9fafb;
+}
+
+/* Editor area inside Quill */
+.ql-container {
+    border: none;
+}
+
+.dark .ql-stroke{
+    stroke: #f9fafb;
+}
+
+.ql-editor {
+    min-height: 200px;
+    font-family: inherit;
+    font-size: 1rem;
+    /* match body text */
+    line-height: 1.5;
+}
+
+.dark .ql-editor {
+    color: #f9fafb;
+}
+
+.dark .ql-toolbar button .ql-stroke {
+    stroke: #f9fafb;
+}
+
+.dark .ql-toolbar button .ql-fill {
+    fill: #f9fafb;
+}
+
+.dark .ql-toolbar .ql-picker-label {
+    color: #f9fafb;
+    /* Tailwind gray-50 */
+}
+
+.dark .ql-toolbar .ql-picker-options {
+    background-color: #1c1c24;
+    color: #f9fafb;
+    border: 1px solid #333;
+}
+
+/* Optional: style Quill buttons/icons */
+.ql-toolbar button {
+    color: inherit;
+}
+
+.ql-toolbar button:hover {
+    background: #e5e7eb;
+    border-radius: 50%;
+    /* Tailwind gray-200 */
+}
+
+.dark .ql-toolbar button:hover {
+    background: #333;
+}

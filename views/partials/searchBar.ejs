@@ -1,0 +1,41 @@
+<form method="GET" action="/" class=" p-4 rounded-xl mb-6 flex flex-col md:flex-row gap-4 items-center justify-between">
+  <!-- Search Input -->
+  <input
+    type="text"
+    name="search"
+    placeholder="Search blogs..."
+    value="<%= typeof search !== 'undefined' ? search : '' %>"
+    class="w-full md:w-1/3 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+  />
+
+  <!-- Category Filter -->
+  <select
+    name="category"
+    class="w-full md:w-1/4 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+  >
+    <option value="">All Categories</option>
+    <option value="Programming" <%= category === 'Programming' ? 'selected' : '' %>>Programming</option>
+    <option value="Web Development" <%= category === 'Web Development' ? 'selected' : '' %>>Web Development</option>
+    <option value="Career" <%= category === 'Career' ? 'selected' : '' %>>Career</option>
+    <option value="Databases" <%= category === 'Databases' ? 'selected' : '' %>>Databases</option>
+    <option value="Web Design" <%= category === 'Web Design' ? 'selected' : '' %>>Web Design</option>
+    <!-- Add more categories as needed -->
+  </select>
+
+  <!-- Sort Order -->
+  <select
+    name="order"
+    class="w-full md:w-1/5 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+  >
+    <option value="ASC" <%= order === 'ASC' ? 'selected' : '' %>>A → Z</option>
+    <option value="DESC" <%= order === 'DESC' ? 'selected' : '' %>>Z → A</option>
+  </select>
+
+  <!-- Submit Button -->
+  <button
+    type="submit"
+    class="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition dark:bg-indigo-500 dark:hover:bg-indigo-600"
+  >
+    Search
+  </button>
+</form>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/images/blog.png" rel="icon" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="/styles/quill.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind CSS configuration for 'class' based dark mode -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Enable manual dark mode via the 'dark' class
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-dark': '#1F2937', // A custom dark primary color
+                        'text-dark': '#E5E7EB',    // A light gray for dark mode text
+                    },
+                }
+            }
+        }
+    </script>
+    <title>Bloggy</title>
+
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .animate-fade-out {
+            animation: fadeOut 0.5s ease-in forwards;
+        }
+
+        /* Works on WebKit browsers */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #6366f1;
+            /* Tailwind indigo-500 */
+            border-radius: 4px;
+            border: 2px solid transparent;
+            background-clip: content-box;
+        }
+
+        /* Optional: Firefox support */
+        .custom-scrollbar {
+            scrollbar-width: thin;
+            scrollbar-color: #6366f1 transparent;
+        }
+
+        /*
+            Set a smooth transition for background and text color changes on the body.
+            This makes the toggle feel much more polished.
+        */
+        body {
+            transition: background-color 0.3s, color 0.3s;
+        }
+    </style>
+</head>
+
+<body class="relative bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 min-h-screen">
+    <header class="text-gray-600 dark:text-gray-400 body-font">
+        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center relative">
+            <a href="/" class="flex title-font font-medium items-center text-gray-900 dark:text-gray-100 mb-4 md:mb-0">
+                <img src="/images/blog.png" class="w-14 text-white p-2 ">
+                <span class="ml-1 text-xl">Bloggy</span>
+            </a>
+            <% if(!locals.user || locals.user && user.type == 'user'){ %>
+            <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+                <a href="/" class="mr-5 hover:text-gray-900 dark:hover:text-gray-50 dark:text-gray-300">Blogs</a>
+                <% if(locals.user){ %>
+                    <a href="/create" class="mr-5 hover:text-gray-900 dark:hover:text-gray-50 dark:text-gray-300">Create
+                        Blog</a>
+                    <% }else{ %>
+                        <a onclick="createClicked()" href="javascript:void(0)"
+                            class="mr-5 hover:text-gray-900 dark:hover:text-gray-50 dark:text-gray-300">Create Blog</a>
+                        <% } %>
+            </nav>
+            <% }%>
+                
+            <!-- Dark Mode Toggle Button -->
+            <button id="theme-toggle" 
+                class="fixed bottom-5 z-50 right-5 p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 shadow-md transition duration-300">
+                <!-- Sun icon (for light mode) -->
+                <svg id="sun-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                    </path>
+                </svg>
+                <!-- Moon icon (for dark mode) -->
+                <svg id="moon-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9 9 0 008.354-5.646z"></path>
+                </svg>
+            </button>
+            <% if(locals.logOut){ %>
+                <a href="/logout"
+                    class="inline-flex items-center bg-gray-100 border-0 py-2 px-3 focus:outline-none hover:cursor-pointer hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded text-base mt-4 md:mt-0 text-gray-800 dark:text-gray-200 transition duration-300 ease-in-out">
+                    Logout
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                        <path d="M17 16l4-4m0 0l-4-4m4 4H7"></path>
+                        <path d="M7 4v16"></path>
+                    </svg>
+                </a>
+                <% }else{ %>
+                    <% if(!locals.notContent) {%>
+                        <% if(!locals.user) {%>
+                            <a href="/login"
+                                class="inline-flex items-center bg-gray-100 border-0 py-2 px-3 focus:outline-none hover:cursor-pointer hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded text-base mt-4 md:mt-0 text-gray-800 dark:text-gray-200">
+                                Log in
+                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                            <% }else{ %>
+                                <% if(user.type == 'user') {%>
+                                <a href="/profile/<%= user.id %>"
+                                    class="inline-flex items-center bg-gray-100 border-0 py-2 px-3 focus:outline-none hover:cursor-pointer hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded text-base mt-4 md:mt-0 text-gray-800 dark:text-gray-200 transition duration-300 ease-in-out">
+                                    <img src="/images/profile-icon.svg" class="w-4 h-4 ml-1 mr-2">
+                                    <%= user.firstname %>
+                                </a>
+                                <% }else{ %>
+                                    <a href="/admin"
+                                    class="inline-flex items-center md:ml-auto bg-gray-100 border-0 py-2 px-3 focus:outline-none hover:cursor-pointer hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded text-base mt-4 md:mt-0 text-gray-800 dark:text-gray-200 transition duration-300 ease-in-out">
+                                    <img src="/images/profile-icon.svg" class="w-4 h-4 ml-1 mr-2">
+                                    <%= user.firstname %>
+                                </a>
+                                    <% } %>
+                                <% } %>
+                                    <% }else{ %>
+                                        <div class="w-20"></div>
+                                        <% } %>
+                                            <% } %>
+        </div>
+    </header>
+
+    <!-- JavaScript to handle the theme toggle -->
+    <script>
+        const htmlElement = document.documentElement;
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        // Check user's preference from localStorage on page load
+        // This makes sure the theme persists across sessions
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+        } else {
+            htmlElement.classList.remove('dark');
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        }
+
+        // Add click event listener to the toggle button
+        themeToggleBtn.addEventListener('click', () => {
+            // Toggle the 'dark' class on the html element
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+        });
+
+        function createClicked() {
+            const isDark = document.documentElement.classList.contains('dark');
+            Swal.fire({
+                icon: 'error',
+                title: 'Login Required',
+                text: 'Please log in first to create a blog.',
+                iconColor: "#6362F1",
+                theme: isDark ? 'dark' : 'light',
+            });
+        }
+    </script>

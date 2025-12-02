@@ -1,0 +1,130 @@
+<%-include("partials/header.ejs") %>
+<%-include("partials/profileCard.ejs") %>
+    <div id="editProfileModal"
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden animate-fade-in">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg w-full max-w-lg p-6 relative">
+            <h2 class="text-xl font-semibold text-indigo-800 dark:text-white mb-4">Edit Profile</h2>
+            <form id="editProfileForm" class="space-y-4" method="POST" action="/update/<%= user.id %>">
+                <div>
+                    <label for="firstName" class="block text-sm font-medium text-gray-700 dark:text-gray-300">First
+                        Name</label>
+                    <input type="text" name="firstName" id="firstName"
+                        class="w-full dark:bg-[#1c1c24] border border-gray-300 dark:border-[#1c1c24]  text-gray-800 dark:text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-600 mt-1"
+                        value="<%= user.firstname %>">
+                </div>
+                <div>
+                    <label for="lastName" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Last
+                        Name</label>
+                    <input type="text" name="lastName" id="lastName"
+                        class="w-full dark:bg-[#1c1c24] border border-gray-300 dark:border-[#1c1c24]  text-gray-800 dark:text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-600 mt-1"
+                        value="<%= user.lastname %>">
+                </div>
+                <div>
+                    <label for="about" class="block text-sm font-medium text-gray-700 dark:text-gray-300">About</label>
+                    <textarea name="about" id="about" rows="4"
+                        class="w-full dark:bg-[#1c1c24] border border-gray-300 dark:border-[#1c1c24]  text-gray-800 dark:text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-600 mt-1"><%= user.about%></textarea>
+                </div>
+                <div class="flex justify-end space-x-2 pt-4">
+                    <button type="button" id="closeEditModal" onclick="fadeOut()"
+                        class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Cancel</button>
+                    <button type="submit"
+                        class="px-4 py-2 bg-indigo-800 text-white rounded hover:bg-blue-900">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <%-include("partials/userBlogs.ejs") %>
+
+    <script>
+
+         window.addEventListener('DOMContentLoaded', () => {
+            const isDark = document.documentElement.classList.contains('dark');
+            const params = new URLSearchParams(window.location.search);
+            const message = params.get('message');
+            console.log(message)
+
+            if(message=="Blog successfully deleted."){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: decodeURIComponent(message),
+                    iconColor: "#6362F1",
+                    theme: isDark ? 'dark' : 'light',
+                }).then(() => {
+            // Remove the query string from the URL without reloading the page
+            const newURL = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, newURL);
+        });
+            }
+         })
+
+        //for update form to pop up
+        const openModalBtn = document.getElementById('openEditModal');
+        const closeModalBtn = document.getElementById('closeEditModal');
+        const modal = document.getElementById('editProfileModal');
+        const form = document.getElementById('editProfileForm');
+
+        openModalBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+        });
+
+        // Optional: close modal on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                modal.classList.add('hidden');
+            }
+        });
+
+        // Submit form with AJAX
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = {
+                firstName: form.firstName.value.trim(),
+                lastName: form.lastName.value.trim(),
+                about: form.about.value.trim(),
+            };
+
+            const isDark = document.documentElement.classList.contains('dark');
+            if (data.firstName.length == 0 || data.lastName.length == 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Fields Incomplete',
+                    text: 'Please fill the incomplete name fields',
+                    iconColor: "#6362F1",
+                    theme: isDark ? 'dark' : 'light',
+                    scrollbarPadding: false,
+                });
+            } else if (data.about.length > 500) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Exceeded Character Limit',
+                    text: 'About section can have a maximum of 500 characters',
+                    iconColor: "#6362F1",
+                    theme: isDark ? 'dark' : 'light',
+                    scrollbarPadding: false,
+                });
+            } else {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'You are about to update your profile details.',
+                    icon: 'warning',
+                    theme: isDark ? 'dark' : 'light',
+                    showCancelButton: true,
+                    iconColor: '#6362F1',
+                    confirmButtonColor: '#6362F1', // A nice blue color
+                    cancelButtonColor: '#d33', // A red color
+                    confirmButtonText: 'Yes, submit it!',
+                    scrollbarPadding: false,
+                }).then((result) => {
+                    // Check if the user clicked the "Yes, submit it!" button
+                    if (result.isConfirmed) {
+                        // If confirmed, submit the form programmatically
+                        form.submit();
+                    }
+                });
+
+            }
+        });
+    </script>
+
+    <%-include("partials/footer.ejs") %>
