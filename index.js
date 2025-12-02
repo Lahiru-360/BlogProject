@@ -115,6 +115,9 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/admin", async (req, res) => {
+  console.log("=== ADMIN ROUTE HIT ===");
+  console.log("req.user:", req.user);
+  console.log("session:", req.session);
   if (req.isAuthenticated() && req.user.type == "admin") {
     const blogData = (
       await db.query(
