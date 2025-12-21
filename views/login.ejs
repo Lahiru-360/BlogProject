@@ -1,157 +1,231 @@
 <%-include("partials/header.ejs") %>
-    <!-- component -->
-    <div class=" flex justify-center items-center h-screen ">
-        <!-- Left: Image -->
-        <div class="w-1/2 h-screen hidden lg:block">
-            <img src="/images/login-img.jpg" id="target-section" alt="Placeholder Image"
-                class="object-cover w-full h-full rounded-r-3xl">
-        </div>
-        <!-- Right: Login Form -->
-        <div class="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
-            <h1 class="text-2xl font-semibold mb-2">Login</h1>
-            <p class="dark:text-gray-400 text-gray-600 mb-8">
-                Don't have an account?
-                <a href="/register"
-                    class="dark:text-white font-semibold  text-black dark:hover:text-indigo-600 hover:text-indigo-600 transition duration-300 ease-in-out">Register</a>
-            </p>
-            <form action="/login" method="POST" id="loginForm">
-                <!-- Username Input -->
-                <div class="mb-4">
-                    <input type="email" placeholder="Username" id="username" name="username"
-                        class="w-full dark:bg-[#1c1c24] border border-gray-300 dark:border-[#1c1c24]  text-gray-800 dark:text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                        autocomplete="off">
-                </div>
-                <!-- Password Input -->
-                <div class="mb-4">
-                    <input type="password" placeholder="Password" id="password" name="password"
-                        class="w-full dark:bg-[#1c1c24] border border-gray-300 dark:border-[#1c1c24]  text-gray-800 dark:text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                        autocomplete="off">
-                </div>
+<!-- component -->
+<div class="flex justify-center items-center h-screen">
+  <!-- Left: Image -->
+  <div class="w-1/2 h-screen hidden lg:block">
+    <img
+      src="/images/login-img.jpg"
+      id="target-section"
+      alt="Placeholder Image"
+      class="object-cover w-full h-full rounded-r-3xl"
+    />
+  </div>
+  <!-- Right: Login Form -->
+  <div class="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
+    <h1 class="text-2xl font-semibold mb-2">Login</h1>
+    <p class="dark:text-gray-400 text-gray-600 mb-8">
+      Don't have an account?
+      <a
+        href="/register"
+        class="dark:text-white font-semibold text-black dark:hover:text-indigo-600 hover:text-indigo-600 transition duration-300 ease-in-out"
+        >Register</a
+      >
+    </p>
+    <form action="/login" method="POST" id="loginForm">
+      <!-- Username Input -->
+      <div class="mb-4">
+        <input
+          type="email"
+          placeholder="Username"
+          id="username"
+          name="username"
+          class="w-full dark:bg-[#1c1c24] border border-gray-300 dark:border-[#1c1c24] text-gray-800 dark:text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+          autocomplete="off"
+        />
+      </div>
+      <!-- Password Input -->
+      <div class="mb-4">
+        <input
+          type="password"
+          placeholder="Password"
+          id="password"
+          name="password"
+          class="w-full dark:bg-[#1c1c24] border border-gray-300 dark:border-[#1c1c24] text-gray-800 dark:text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+          autocomplete="off"
+        />
+      </div>
 
-                <!-- Forgot Password Link -->
-                <div class="mb-6 text-indigo-500">
-                    <a href="#" class="hover:text-indigo-800 transition duration-300 ease-in-out">Forgot Password?</a>
-                </div>
-                <!-- Login Button -->
-                <button type="submit"
-                    class="bg-indigo-500 hover:bg-indigo-800 text-white font-semibold rounded-md py-2 px-4 w-full  transition duration-300 ease-in-out">Login</button>
-            </form>
-            <div class="relative my-8">
-                <div class="absolute inset-0 flex items-center">
-                    <div class="w-full border-t border-gray-400 "></div>
-                </div>
-                <div class="relative flex justify-center text-sm">
-                    <span class="px-2 dark:bg-[#111827]  bg-gray-100 dark:text-gray-400 text-gray-600">Or
-                        continue with</span>
-                </div>
-            </div>
-            <div class="flex flex-col justify-center md:flex-row gap-4">
-                <a href="/auth/google" class="
-                w-full md:w-1/2
-                flex items-center justify-center gap-2 
-                rounded-lg p-3
-                
-                /* --- Light Mode Colors & Border --- */
-                bg-gray-100 text-gray-800
-                hover:bg-gray-200
-                border-2 border-gray-300
-                
-                /* --- Dark Mode Colors & Border --- */
-                dark:bg-[#1c1c24] dark:text-white
-                dark:hover:bg-[#25252e]
-                dark:border-none
-                
-                /* --- Transitions & Cursor --- */
-                transition-colors duration-300
-                cursor-pointer
-                ">
-                    <svg class="w-5 h-5 dark:hidden" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M12.24 10.35V13.86H18.49C18.23 15.17 17.51 16.29 16.48 17.07L20.17 20.76C22.31 18.57 23.5 15.65 23.5 12C23.5 10.98 23.39 9.98 23.18 9H12.24Z"
-                            fill="#4285F4" />
-                        <path
-                            d="M12.24 23.5C15.42 23.5 18.1 22.42 20.17 20.76L16.48 17.07C15.42 17.84 14.07 18.35 12.24 18.35C9.07 18.35 6.39 16.29 5.33 13.11H1.54V16.89C2.79 19.38 5.76 21 9.17 21C10.15 21 11.08 20.8 11.93 20.4L12.24 23.5Z"
-                            fill="#34A853" />
-                        <path
-                            d="M5.33 13.11C5.07 12.44 4.93 11.73 4.93 11C4.93 10.27 5.07 9.56 5.33 8.89V5.11H1.54C0.58 6.95 0 8.92 0 11C0 13.08 0.58 15.05 1.54 16.89L5.33 13.11Z"
-                            fill="#FBBC04" />
-                        <path
-                            d="M12.24 4.93C14.19 4.93 15.82 5.56 16.94 6.55L20.47 3.02C18.2 0.99 15.43 0 12.24 0C8.83 0 5.86 1.62 4.61 4.11L8.4 7.89C9.25 6.71 10.51 4.93 12.24 4.93Z"
-                            fill="#EA4335" />
-                    </svg>
+      <!-- Forgot Password Link -->
+      <div class="mb-6 text-indigo-500">
+        <a
+          href="#"
+          class="hover:text-indigo-800 transition duration-300 ease-in-out"
+          >Forgot Password?</a
+        >
+      </div>
+      <!-- Login Button -->
+      <button
+        type="submit"
+        class="bg-indigo-500 hover:bg-indigo-800 text-white font-semibold rounded-md py-2 px-4 w-full transition duration-300 ease-in-out"
+      >
+        Login
+      </button>
+    </form>
+    <!-- DEMO ACCESS -->
+    <div
+      class="mt-6 rounded-lg border border-gray-300 dark:border-[#1c1c24] bg-gray-100 dark:bg-[#1c1c24] p-4"
+    >
+      <p class="text-sm font-semibold text-gray-800 dark:text-white mb-1">
+        Demo Access (For Reviewers)
+      </p>
+      <p class="text-xs text-gray-600 dark:text-gray-400 mb-3">
+        Click to auto-fill credentials
+      </p>
 
-                    <svg class="w-5 h-5 hidden dark:block" viewBox="0 0 24 24">
-                        <path fill="currentColor"
-                            d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z" />
-                    </svg>
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-sm text-gray-700 dark:text-gray-300"
+          >User Account</span
+        >
+        <button
+          type="button"
+          id="demo-user"
+          class="text-sm text-indigo-600 hover:text-indigo-800 dark:hover:text-indigo-400 transition"
+        >
+          Use
+        </button>
+      </div>
 
-                    <span>Google</span>
-                </a>
-            </div>
-        </div>
+      <div class="flex items-center justify-between">
+        <span class="text-sm text-gray-700 dark:text-gray-300"
+          >Admin Account</span
+        >
+        <button
+          type="button"
+          id="demo-admin"
+          class="text-sm text-indigo-600 hover:text-indigo-800 dark:hover:text-indigo-400 transition"
+        >
+          Use
+        </button>
+      </div>
     </div>
-    <script>
-        const username = document.getElementById("username")
-        const password = document.getElementById("password")
-        const loginForm = document.getElementById("loginForm")
 
-        window.addEventListener('DOMContentLoaded', () => {
-            const targetElement = document.getElementById('target-section');
+    <div class="relative my-8">
+      <div class="absolute inset-0 flex items-center">
+        <div class="w-full border-t border-gray-400"></div>
+      </div>
+      <div class="relative flex justify-center text-sm">
+        <span
+          class="px-2 dark:bg-[#111827] bg-gray-100 dark:text-gray-400 text-gray-600"
+          >Or continue with</span
+        >
+      </div>
+    </div>
+    <div class="flex flex-col justify-center md:flex-row gap-4">
+      <a
+        href="/auth/google"
+        class="w-full md:w-1/2 flex items-center justify-center gap-2 rounded-lg p-3 /* --- Light Mode Colors & Border --- */ bg-gray-100 text-gray-800 hover:bg-gray-200 border-2 border-gray-300 /* --- Dark Mode Colors & Border --- */ dark:bg-[#1c1c24] dark:text-white dark:hover:bg-[#25252e] dark:border-none /* --- Transitions & Cursor --- */ transition-colors duration-300 cursor-pointer"
+      >
+        <svg
+          class="w-5 h-5 dark:hidden"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12.24 10.35V13.86H18.49C18.23 15.17 17.51 16.29 16.48 17.07L20.17 20.76C22.31 18.57 23.5 15.65 23.5 12C23.5 10.98 23.39 9.98 23.18 9H12.24Z"
+            fill="#4285F4"
+          />
+          <path
+            d="M12.24 23.5C15.42 23.5 18.1 22.42 20.17 20.76L16.48 17.07C15.42 17.84 14.07 18.35 12.24 18.35C9.07 18.35 6.39 16.29 5.33 13.11H1.54V16.89C2.79 19.38 5.76 21 9.17 21C10.15 21 11.08 20.8 11.93 20.4L12.24 23.5Z"
+            fill="#34A853"
+          />
+          <path
+            d="M5.33 13.11C5.07 12.44 4.93 11.73 4.93 11C4.93 10.27 5.07 9.56 5.33 8.89V5.11H1.54C0.58 6.95 0 8.92 0 11C0 13.08 0.58 15.05 1.54 16.89L5.33 13.11Z"
+            fill="#FBBC04"
+          />
+          <path
+            d="M12.24 4.93C14.19 4.93 15.82 5.56 16.94 6.55L20.47 3.02C18.2 0.99 15.43 0 12.24 0C8.83 0 5.86 1.62 4.61 4.11L8.4 7.89C9.25 6.71 10.51 4.93 12.24 4.93Z"
+            fill="#EA4335"
+          />
+        </svg>
 
-            // Check if the element exists on the page
-            if (targetElement) {
-                // Use scrollIntoView() with the 'smooth' behavior
-                targetElement.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-            const params = new URLSearchParams(window.location.search);
-            const error = params.get('error');
-            const isDark = document.documentElement.classList.contains('dark');
-            console.log(error)          
-            if (error == "User Already Exists. Consider logging in.") {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Register Failed',
-                    text: decodeURIComponent(error),
-                    iconColor: "#6362F1",
-                    theme: isDark ? 'dark' : 'light',
-                }).then(() => {
-            // Remove the query string from the URL without reloading the page
-            const newURL = window.location.origin + window.location.pathname;
-            window.history.replaceState({}, document.title, newURL);
-        });
-            }else if(error){
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Login Failed',
-                    text: decodeURIComponent(error),
-                    iconColor: "#6362F1",
-                    theme: isDark ? 'dark' : 'light',
-                }).then(() => {
-            // Remove the query string from the URL without reloading the page
-            const newURL = window.location.origin + window.location.pathname;
-            window.history.replaceState({}, document.title, newURL);
-        });
-            }
-        });
+        <svg class="w-5 h-5 hidden dark:block" viewBox="0 0 24 24">
+          <path
+            fill="currentColor"
+            d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z"
+          />
+        </svg>
 
-        loginForm.addEventListener("submit", (event) => {
-            event.preventDefault();
-            const isDark = document.documentElement.classList.contains('dark');
-            if (username.value.length == 0 || password.value.length == 0) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Fields Incomplete',
-                    text: 'Please fill the incomplete fields',
-                    iconColor: "#6362F1",
-                    theme: isDark ? 'dark' : 'light',
-                });
-            } else {
-                loginForm.submit();
-            }
-        })
+        <span>Google</span>
+      </a>
+    </div>
+  </div>
+</div>
+<script>
+  const username = document.getElementById("username");
+  const password = document.getElementById("password");
+  const loginForm = document.getElementById("loginForm");
 
+  window.addEventListener("DOMContentLoaded", () => {
+    const targetElement = document.getElementById("target-section");
 
-    </script>
-    <%-include("partials/footer.ejs") %>
+    // Check if the element exists on the page
+    if (targetElement) {
+      // Use scrollIntoView() with the 'smooth' behavior
+      targetElement.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+    const params = new URLSearchParams(window.location.search);
+    const error = params.get("error");
+    const isDark = document.documentElement.classList.contains("dark");
+    console.log(error);
+    if (error == "User Already Exists. Consider logging in.") {
+      Swal.fire({
+        icon: "error",
+        title: "Register Failed",
+        text: decodeURIComponent(error),
+        iconColor: "#6362F1",
+        theme: isDark ? "dark" : "light",
+      }).then(() => {
+        // Remove the query string from the URL without reloading the page
+        const newURL = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, document.title, newURL);
+      });
+    } else if (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: decodeURIComponent(error),
+        iconColor: "#6362F1",
+        theme: isDark ? "dark" : "light",
+      }).then(() => {
+        // Remove the query string from the URL without reloading the page
+        const newURL = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, document.title, newURL);
+      });
+    }
+  });
+
+  loginForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const isDark = document.documentElement.classList.contains("dark");
+    if (username.value.length == 0 || password.value.length == 0) {
+      Swal.fire({
+        icon: "error",
+        title: "Fields Incomplete",
+        text: "Please fill the incomplete fields",
+        iconColor: "#6362F1",
+        theme: isDark ? "dark" : "light",
+      });
+    } else {
+      loginForm.submit();
+    }
+  });
+
+  const demoUserBtn = document.getElementById("demo-user");
+  const demoAdminBtn = document.getElementById("demo-admin");
+
+  demoUserBtn?.addEventListener("click", () => {
+    username.value = "jayantharatnayake633@gmail.com";
+    password.value = "user@123";
+    username.focus();
+  });
+
+  demoAdminBtn?.addEventListener("click", () => {
+    username.value = "lahirugreat35@gmail.com";
+    password.value = "admin@123";
+    username.focus();
+  });
+</script>
+<%-include("partials/footer.ejs") %>

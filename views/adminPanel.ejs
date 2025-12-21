@@ -91,40 +91,60 @@
       id="sidebar"
       class="w-64 bg-white dark:bg-gray-800 shadow-lg fixed inset-y-0 left-0 z-40 overflow-y-auto transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out"
     >
-      <div class="p-6 font-bold text-2xl text-indigo-600 dark:text-indigo-400">
+      <!-- Brand -->
+      <div
+        class="p-6 text-xl font-semibold tracking-wide text-indigo-600 dark:text-indigo-400 border-b border-gray-200 dark:border-gray-700"
+      >
         Bloggy Admin
       </div>
-      <nav class="mt-6 space-y-2 text-sm font-medium">
+
+      <!-- Navigation -->
+      <nav
+        class="mt-4 space-y-1 text-sm font-medium text-gray-700 dark:text-gray-200"
+      >
         <a
           href="#dashboard"
-          class="block py-2 px-6 hover:bg-indigo-50 dark:hover:bg-gray-700 rounded"
-          >📊 Dashboard</a
+          class="block py-2.5 px-6 rounded-md hover:bg-indigo-50 dark:hover:bg-gray-700 hover:text-indigo-600 dark:hover:text-indigo-400 transition"
         >
+          Dashboard
+        </a>
+
         <a
           href="#users"
-          class="block py-2 px-6 hover:bg-indigo-50 dark:hover:bg-gray-700 rounded"
-          >👤 Users</a
+          class="block py-2.5 px-6 rounded-md hover:bg-indigo-50 dark:hover:bg-gray-700 hover:text-indigo-600 dark:hover:text-indigo-400 transition"
         >
+          Users
+        </a>
+
         <a
           href="#blogs"
-          class="block py-2 px-6 hover:bg-indigo-50 dark:hover:bg-gray-700 rounded"
-          >📝 Blogs</a
+          class="block py-2.5 px-6 rounded-md hover:bg-indigo-50 dark:hover:bg-gray-700 hover:text-indigo-600 dark:hover:text-indigo-400 transition"
         >
+          Blogs
+        </a>
+
         <a
           href="#approvals"
-          class="block py-2 px-6 hover:bg-indigo-50 dark:hover:bg-gray-700 rounded"
-          >✅ Approvals</a
+          class="block py-2.5 px-6 rounded-md hover:bg-indigo-50 dark:hover:bg-gray-700 hover:text-indigo-600 dark:hover:text-indigo-400 transition"
         >
+          Approvals
+        </a>
+
         <a
           href="#settings"
-          class="block py-2 px-6 hover:bg-indigo-50 dark:hover:bg-gray-700 rounded"
-          >⚙️ Settings</a
+          class="block py-2.5 px-6 rounded-md hover:bg-indigo-50 dark:hover:bg-gray-700 hover:text-indigo-600 dark:hover:text-indigo-400 transition"
         >
-        <a
-          href="/logout"
-          class="block py-2 px-6 text-red-600 hover:bg-red-100 dark:hover:bg-red-800 rounded"
-          >🚪 Logout</a
-        >
+          Settings
+        </a>
+
+        <div class="pt-4 mt-4 border-t border-gray-200 dark:border-gray-700">
+          <a
+            href="/logout"
+            class="block py-2.5 px-6 rounded-md text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 transition"
+          >
+            Logout
+          </a>
+        </div>
       </nav>
     </aside>
 
@@ -303,25 +323,23 @@
                 <td class="p-4"><%= blog.category %></td>
                 <td class="p-4"><%= blog.firstname %> <%= blog.lastname %></td>
                 <td class="p-4">
-  <% if (blog.published_at) { %>
-    <%= days[blog.published_at.getDay()] %>
-    <%= blog.published_at.getMonth() + 1 %>/
-    <%= blog.published_at.getDate() %>/
-    <%= blog.published_at.getFullYear() %>
-    <%= blog.published_at.getHours().toString().padStart(2, '0') %>:
-    <%= blog.published_at.getMinutes().toString().padStart(2, '0') %>:
-    <%= blog.published_at.getSeconds().toString().padStart(2, '0') %>
-  <% } else { %>
-    <%= days[blog.created_at.getDay()] %>
-    <%= blog.created_at.getMonth() + 1 %>/
-    <%= blog.created_at.getDate() %>/
-    <%= blog.created_at.getFullYear() %>
-    <%= blog.created_at.getHours().toString().padStart(2, '0') %>:
-    <%= blog.created_at.getMinutes().toString().padStart(2, '0') %>:
-    <%= blog.created_at.getSeconds().toString().padStart(2, '0') %>
-  <% } %>
-</td>
-
+                  <% if (blog.published_at) { %> <%=
+                  days[blog.published_at.getDay()] %> <%=
+                  blog.published_at.getMonth() + 1 %>/ <%=
+                  blog.published_at.getDate() %>/ <%=
+                  blog.published_at.getFullYear() %> <%=
+                  blog.published_at.getHours().toString().padStart(2, '0') %>:
+                  <%= blog.published_at.getMinutes().toString().padStart(2, '0')
+                  %>: <%= blog.published_at.getSeconds().toString().padStart(2,
+                  '0') %> <% } else { %> <%= days[blog.created_at.getDay()] %>
+                  <%= blog.created_at.getMonth() + 1 %>/ <%=
+                  blog.created_at.getDate() %>/ <%=
+                  blog.created_at.getFullYear() %> <%=
+                  blog.created_at.getHours().toString().padStart(2, '0') %>: <%=
+                  blog.created_at.getMinutes().toString().padStart(2, '0') %>:
+                  <%= blog.created_at.getSeconds().toString().padStart(2, '0')
+                  %> <% } %>
+                </td>
 
                 <td class="p-4 space-x-2">
                   <a
