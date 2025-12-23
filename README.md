@@ -206,4 +206,4 @@ BlogProject/
 - Role-based access control (user/admin)
 - SQL injection prevention with parameterized queries
 
-**Author**: Lahiru Hettiarachchi
+**Author**: Lahiru Hettiarachchi (Developer)
